@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Bottom navbar example · Bootstrap</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css');
+        html,
+        body {
+          height: 100%
+        }
+</style>
+
+  </head>
+  <body style="text-align:center">
+  <nav class="d-sm-none d-md-block navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">tessmero.github.io</a>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+    
+    
+         <li class="nav-item active">
+           <a class="nav-link" href="warp.html">Warp</a>
+         </li>
+        
+         <li class="nav-item ">
+           <a class="nav-link" href="sugarcubes.html">Sugar Cubes</a>
+         </li>
+        
+         <li class="nav-item ">
+           <a class="nav-link" href="tilegame.html">Tile Game</a>
+         </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+      
+      
+  
+  
+<canvas id="gameCanvas"></canvas>
+
+<script src="production.js"></script>
+      
+      
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+    
+    * { margin: 0; padding: 0;}
+
+    body, html { height:100%; }
+
+    canvas {
+        position:absolute;
+        left: 0px;
+        width:100%;
+        height:100%;
+    }
+</style>
+      
+</html>
