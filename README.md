@@ -1,11 +1,13 @@
-Random scribbles gradually form detailed shapes.
+
+Chaotic bouncing balls form pre-determined patterns.
+
+Physics calculations are performed using only whole numbers to avoid platform-dependant rounding errors accumulating over time.
 
 Click to reset.
 
-
 ## Demo
 
-https://tessmero.github.io/sketch.html
+https://tessmero.github.io/paintball.html
 
 ## Usage
 

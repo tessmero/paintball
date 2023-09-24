@@ -15,6 +15,7 @@ const global = {
     // 
     backgroundColor: 'black',
     barrierColor: '#AAA',
+    brickColor: '#888',
     
     // physics settings
     msPerTick: 5,
@@ -41,7 +42,7 @@ const global = {
     
     //
     autoResetCountdown: 0,
-    autoResetDelay: 12000,
+    autoResetDelay: 1000,
 
     
     //debug

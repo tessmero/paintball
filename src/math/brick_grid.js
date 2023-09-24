@@ -4,6 +4,7 @@ class BrickGrid {
         centerY = Math.floor( centerY/global.minDist )
         
         var n = global.nBricksPerRow
+        this.n2 = n*n
         this.rad = (n * global.brickSize) / 2
         
         this.xr = [centerX - this.rad, centerX + this.rad]
@@ -30,17 +31,23 @@ class BrickGrid {
             this.brickColors[i] = allColors[color]
             this.brickIndices[i] = b.index
             this.hitCount++
-            console.log( [this.brickColors[i], this.hitCount, global.nBricksPerRow*global.nBricksPerRow] )
+            //console.log( [this.brickColors[i], this.hitCount, global.nBricksPerRow*global.nBricksPerRow] )
             return true
         }
         return false
+    }
+    
+    isDone(){
+        return (this.hitCount >= this.n2)
     }
 
     draw(g){
         
         // debug, after all bricks ar hit
-        if( true && (this.hitCount >= global.nBricksPerRow*global.nBricksPerRow ) ){
-           console.log(this.brickIndices)
+        if( true && global.seedstr && this.isDone() ){
+            
+            console.log(JSON.stringify([global.seedstr,global.startlineDuration,global.randVels,this.brickIndices]))
+            
         }
         
         var n = global.nBricksPerRow
@@ -51,7 +58,7 @@ class BrickGrid {
                     g.fillStyle = c
                     g.fillRect( ...this.rectForBrick(xi,yi) )
                 } else {
-                    g.fillStyle = 'gray'
+                    g.fillStyle = global.brickColor
                     g.fillRect( ...this.rectForBrick(xi,yi) )
                 }
             }

@@ -32,7 +32,7 @@ function update(dt) {
             !global.brickGrid.checkHitBrick(b))
     }
     
-    if( false ){
+    if( global.brickGrid.isDone() ){
         global.autoResetCountdown -= dt
         if( global.autoResetCountdown < 0 ){
             resetGame()
@@ -45,6 +45,7 @@ var lastCanvasOffsetHeight = -1;
 function fitToContainer(){
     
     var cvs = global.canvas
+    var g = global.ctx
     if( (cvs.offsetWidth!=lastCanvasOffsetWidth) || (cvs.offsetHeight!=lastCanvasOffsetHeight) ){
         
       cvs.width  = cvs.offsetWidth;
@@ -58,8 +59,13 @@ function fitToContainer(){
     global.ctx.setTransform(global.canvasScale * global.minDist, 0, 0, 
         global.canvasScale * global.minDist, global.canvasOffsetX, global.canvasOffsetY);
         
-        var xr = -global.canvasOffsetX / global.canvasScale * global.minDist
-        var yr = -global.canvasOffsetY / global.canvasScale * global.minDist
-        global.screenCorners = [v(xr,yr),v(1-xr,yr),v(1-xr,1-yr),v(xr,1-yr)]
+        var xr = 0
+        var yr = 0
+        var m = 1/global.minDist
+        global.screenCorners = [v(xr,yr),v(m-xr,yr),v(m-xr,m-yr),v(xr,m-yr)]
+        
+        g.beginPath();
+        g.rect(xr,yr,m,m);
+        g.clip();
     }
 }

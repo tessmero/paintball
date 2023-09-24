@@ -25,14 +25,11 @@ function draw(fps, t) {
             g.fillStyle = 'red'
             g.beginPath()
             g.moveTo(c.x,c.y)
-            g.arc(c.x,c.y,global.ballRadius*10,0,twopi)
+            g.arc(c.x,c.y,global.ballRadius*20,0,twopi)
             g.fill()
         })
     }
 
     //debug
     //drawFilledChunks(ctx)
-    g.font = "300px Arial";
-    g.fillStyle = 'black'
-    g.fillText(`${global.mousePos.x.toFixed(0)}, ${global.mousePos.y.toFixed(0)}`, 5000,5000);
 }
