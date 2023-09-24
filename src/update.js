@@ -14,8 +14,20 @@ function update(dt) {
     
     // advance simulation
     for( var i = 0 ; i < nTicks ; i++ ){
-        var deadBalls = []
-        global.allBalls.forEach( b => b.advance())
+        
+        // advance moving barriers
+        global.allBars.forEach( b => b.advance())
+        
+        // advance balls and bounce off of barriers
+        global.gravityTickCountdown--
+        var gtick = false
+        if( global.gravityTickCountdown <= 0 ){
+            gtick = true
+            global.gravityTickCountdown = global.gravityTickDelay
+        }
+        global.allBalls.forEach( b => b.advance( gtick ))
+        
+        // remove balls and paint bricks that collided
         global.allBalls = global.allBalls.filter(b => 
             !global.brickGrid.checkHitBrick(b))
     }
@@ -43,11 +55,11 @@ function fitToContainer(){
         global.canvasScale = dimension;
         global.canvasOffsetX = (cvs.width - dimension) / 2;
         global.canvasOffsetY = (cvs.height - dimension) / 2;
-    global.ctx.setTransform(global.canvasScale, 0, 0, 
-        global.canvasScale, global.canvasOffsetX, global.canvasOffsetY);
+    global.ctx.setTransform(global.canvasScale * global.minDist, 0, 0, 
+        global.canvasScale * global.minDist, global.canvasOffsetX, global.canvasOffsetY);
         
-        var xr = -global.canvasOffsetX / global.canvasScale
-        var yr = -global.canvasOffsetY / global.canvasScale
+        var xr = -global.canvasOffsetX / global.canvasScale * global.minDist
+        var yr = -global.canvasOffsetY / global.canvasScale * global.minDist
         global.screenCorners = [v(xr,yr),v(1-xr,yr),v(1-xr,1-yr),v(xr,1-yr)]
     }
 }

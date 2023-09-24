@@ -11,8 +11,8 @@ function updateMousePos(event){
     
     )
     global.mousePos = new Vector( 
-        virtualMouseX = (global.canvasMousePos.x-global.canvasOffsetX)/global.canvasScale, 
-        virtualMouseY = (global.canvasMousePos.y-global.canvasOffsetY)/global.canvasScale
+        virtualMouseX = (global.canvasMousePos.x-global.canvasOffsetX)/global.canvasScale / global.minDist, 
+        virtualMouseY = (global.canvasMousePos.y-global.canvasOffsetY)/global.canvasScale / global.minDist
     )
 }
 

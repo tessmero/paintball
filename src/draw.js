@@ -7,7 +7,7 @@ function draw(fps, t) {
     var canvas = global.canvas
     g.fillStyle = global.backgroundColor
     g.lineWidth = .001
-    g.fillRect( 0, 0, 1, 1 )
+    g.fillRect( 0, 0, 1/global.minDist, 1/global.minDist )
 
     // draw bricks
     global.brickGrid.draw(g)
@@ -16,17 +16,23 @@ function draw(fps, t) {
     global.allBalls.forEach( b => b.draw(g) )
     
     // draw barriers
+    g.fillStyle = global.barrierColor
     global.allBars.forEach( b => b.draw(g) )
+    
+    // debug draw corners
+    if( false ){
+        global.screenCorners.forEach( c => {
+            g.fillStyle = 'red'
+            g.beginPath()
+            g.moveTo(c.x,c.y)
+            g.arc(c.x,c.y,global.ballRadius*10,0,twopi)
+            g.fill()
+        })
+    }
 
     //debug
     //drawFilledChunks(ctx)
-
-    //y += 30
-    //ctx.fillText(`camera: ${cameraX.toFixed(2)}, ${cameraY.toFixed(2)}, ${zoomLevel.toFixed(2)}`, x, y);
-    //y += 30
-    //ctx.fillText(gameState, x, y);
-    //y += 30 
-    //ctx.fillText(`canvas pos: ${canvasMouseX}, ${canvasMouseY}`, x, y);
-    //y += 30
-    //ctx.fillText(`virtual pos: ${virtualMouseX}, ${virtualMouseY}`, x, y);
+    g.font = "300px Arial";
+    g.fillStyle = 'black'
+    g.fillText(`${global.mousePos.x.toFixed(0)}, ${global.mousePos.y.toFixed(0)}`, 5000,5000);
 }

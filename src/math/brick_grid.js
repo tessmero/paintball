@@ -1,5 +1,8 @@
 class BrickGrid {
     constructor( centerX, centerY ){
+        centerX = Math.floor( centerX/global.minDist )
+        centerY = Math.floor( centerY/global.minDist )
+        
         var n = global.nBricksPerRow
         this.rad = (n * global.brickSize) / 2
         
@@ -13,10 +16,10 @@ class BrickGrid {
     
     // return true if a white brick is hit by a ball at given pos
     checkHitBrick(b){
-        var x = b.x
-        var y = b.y
+        var x = b.x// * global.minDist
+        var y = b.y// * global.minDist
         var color = b.color
-        if( (x<this.xr[0]) || (y<this.yr[0]) || (x>this.xr[1]) || (y>this.yr[1]) ){
+        if( (x<this.xr[0]) || (y<this.yr[0]) || (x>=this.xr[1]) || (y>=this.yr[1]) ){
             return false
         }
         
@@ -27,6 +30,7 @@ class BrickGrid {
             this.brickColors[i] = allColors[color]
             this.brickIndices[i] = b.index
             this.hitCount++
+            console.log( [this.brickColors[i], this.hitCount, global.nBricksPerRow*global.nBricksPerRow] )
             return true
         }
         return false
@@ -35,22 +39,20 @@ class BrickGrid {
     draw(g){
         
         // debug, after all bricks ar hit
-        if( true && (this.hitCount == global.nBricksPerRow*global.nBricksPerRow ) ){
+        if( true && (this.hitCount >= global.nBricksPerRow*global.nBricksPerRow ) ){
            console.log(this.brickIndices)
         }
         
         var n = global.nBricksPerRow
         for( var xi = 0 ; xi < n; xi++ ){
             for( var yi = 0 ; yi < n; yi++ ){
-                var x = this.xr[0]+xi*global.brickSize
-                var y = this.yr[0]+yi*global.brickSize
                 var c = this.brickColors[xi*global.nBricksPerRow + yi]
                 if( c ){
                     g.fillStyle = c
-                    g.fillRect( x, y,  global.brickSize, global.brickSize )
+                    g.fillRect( ...this.rectForBrick(xi,yi) )
                 } else {
                     g.fillStyle = 'gray'
-                    g.fillRect( x, y,  global.brickSize, global.brickSize )
+                    g.fillRect( ...this.rectForBrick(xi,yi) )
                 }
             }
         }
@@ -60,14 +62,20 @@ class BrickGrid {
         g.beginPath()
         for( var xi = 0 ; xi < n; xi++ ){
             for( var yi = 0 ; yi < n; yi++ ){
-                var x = this.xr[0]+xi*global.brickSize
-                var y = this.yr[0]+yi*global.brickSize
                 var c = this.brickColors[xi*global.nBricksPerRow + yi]
                 if( !c ){
-                    g.rect( x, y,  global.brickSize, global.brickSize )
+                    g.rect( ...this.rectForBrick(xi,yi) )
                 }
             }
         }
         g.stroke()
+    }
+    
+    rectForBrick( xi, yi ){
+        return [
+            this.xr[0]+xi*global.brickSize,
+            this.yr[0]+yi*global.brickSize,
+            global.brickSize, global.brickSize
+        ]
     }
 }
